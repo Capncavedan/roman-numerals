@@ -11,7 +11,7 @@ class RomanNumeral
   }
 
   def self.to_arabic(numeral)
-    numeral = numeral.to_s.gsub(/[^IVXLCDM]/, '')
+    numeral = numeral.to_s.upcase.gsub(/[^IVXLCDM]/, '')
     return nil if numeral == ''
     ret = 0
     numeral.chars.each_with_index do |char, i|

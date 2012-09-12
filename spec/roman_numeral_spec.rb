@@ -2,44 +2,31 @@ require 'roman_numeral'
 
 describe RomanNumeral do
 
-  context "bad input" do
-    it "should return nil for an unknown character" do
-      RomanNumeral.to_arabic('h').should be_nil
-    end
-
-    it "should return nil for an empty string" do
-      RomanNumeral.to_arabic('').should be_nil
-    end
-
-    it "should return nil for nil" do
-      RomanNumeral.to_arabic(nil).should be_nil
-    end
-
-    it "should return correct value even with spaces" do
-      RomanNumeral.to_arabic('X X X I').should eq(31)
-    end
-  end
-
-
   context "basic conversion" do
     it "returns an Arabic 1 for a Roman numeral I" do
       RomanNumeral.to_arabic('I').should eq(1)
     end
+
     it "returns an Arabic 5 for a Roman numeral V" do
       RomanNumeral.to_arabic('V').should eq(5)
     end
+
     it "returns an Arabic 5 for a Roman numeral V" do
       RomanNumeral.to_arabic('X').should eq(10)
     end
+
     it "returns an Arabic 5 for a Roman numeral V" do
       RomanNumeral.to_arabic('L').should eq(50)
     end
+
     it "returns an Arabic 5 for a Roman numeral V" do
       RomanNumeral.to_arabic('C').should eq(100)
     end
+
     it "returns an Arabic 5 for a Roman numeral V" do
       RomanNumeral.to_arabic('D').should eq(500)
     end
+
     it "returns an Arabic 5 for a Roman numeral V" do
       RomanNumeral.to_arabic('M').should eq(1000)
     end
@@ -67,6 +54,28 @@ describe RomanNumeral do
       it "returns 1999 for #{num}" do
         RomanNumeral.to_arabic(num).should eq(1999)
       end
+    end
+  end
+
+  context "bad input" do
+    it "should return nil for an unknown character" do
+      RomanNumeral.to_arabic('h').should be_nil
+    end
+
+    it "should return nil for an empty string" do
+      RomanNumeral.to_arabic('').should be_nil
+    end
+
+    it "should return nil for nil" do
+      RomanNumeral.to_arabic(nil).should be_nil
+    end
+
+    it "should return correct value when numeral has spaces" do
+      RomanNumeral.to_arabic('X X X I').should eq(31)
+    end
+
+    it "should return correct value when numeral is lowercase" do
+      RomanNumeral.to_arabic('mdclxvi').should eq(1666)
     end
   end
 
