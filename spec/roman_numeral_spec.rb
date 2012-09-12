@@ -16,6 +16,16 @@ describe RomanNumeral do
     end
   end
 
+
+
+
+
+
+
+
+
+
+
   context "basic conversion of a Roman numeral" do
     RomanNumeral::ARABIC.each do |roman, arabic|
       it "returns Arabic value #{arabic} for Roman numeral #{roman}" do

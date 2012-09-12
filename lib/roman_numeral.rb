@@ -42,10 +42,19 @@ class RomanNumeral
     @roman
   end
 
+
   private
 
   def calculate_roman_equivalent
-    @roman = ROMAN[@arabic]
+    @roman = ''
+    remainder = @arabic
+    while remainder > 0
+      %w(M D C L X V I).each do |num|
+        next if ARABIC[num] > remainder
+        @roman += num
+        remainder -= ARABIC[num]
+      end
+    end
   end
 
   def calculate_arabic_equivalent
