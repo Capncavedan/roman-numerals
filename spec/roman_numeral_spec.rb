@@ -27,8 +27,8 @@ describe RomanNumeral do
       RomanNumeral.new('CXC').arabic.should eq(190)
     end
 
+    # example numbers from http://en.wikipedia.org/wiki/Roman_numerals
     %w(MDCCCCLXXXXVIIII  MCMXCIX  MIM).each do |num|
-      # example numbers from http://en.wikipedia.org/wiki/Roman_numerals
       it "returns Arabic value 1999 for Roman numeral #{num}" do
         RomanNumeral.new(num).arabic.should eq(1999)
       end
