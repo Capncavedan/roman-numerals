@@ -20,6 +20,9 @@ class RomanNumeral
      1000 => 'M'
   }
 
+  SUBTRACTABLE_ROMANS = %w(I X C)
+
+
   def initialize(num)
     if num.is_a? Fixnum
       @arabic = num
@@ -46,38 +49,49 @@ class RomanNumeral
   private
 
   def calculate_roman_equivalent
-    @roman = ''
+    @roman = roman_equivalent(@arabic)
+  end
+
+  def roman_equivalent(arabic_number)
+    ret = ''
     digits = []
-    @arabic.to_s.reverse.chars.each_with_index do |c,i|
+    arabic_number.to_s.reverse.chars.each_with_index do |c,i|
       n = c + ('0' * i)
       digits << n.to_i
     end
     digits.reverse!
     digits.each do |d|
       if d >= 1000
-        @roman += ('M' * (d/1000))
+        ret += ('M' * (d/1000))
       elsif d >= 100
-        @roman += ('C' * (d/100))
+        ret += ('C' * (d/100))
       elsif d >= 10
-        @roman += ('X' * (d/10))
+        ret += ('X' * (d/10))
       elsif d >= 5
-        @roman += ('V' * (d/5))
+        ret += ('V' * (d/5))
       else
-        @roman += ('I' * d)
+        ret += ('I' * d)
       end
     end
+    ret += 'I' while (arabic_equivalent(ret) < arabic_number)
+    ret
   end
 
   def calculate_arabic_equivalent
-    @arabic = 0
-    @roman.chars.each_with_index do |char, i|
-      next_char = @roman[i+1] # will be nil when block is at end of string
+    @arabic = arabic_equivalent(@roman)
+  end
+
+  def arabic_equivalent(roman_string)
+    ret = 0
+    roman_string.chars.each_with_index do |char, i|
+      next_char = roman_string[i+1] # will be nil when block is at end of string
       if next_char && ARABIC[char] < ARABIC[next_char]
-        @arabic -= ARABIC[char]
+        ret -= ARABIC[char]
       else
-        @arabic += ARABIC[char]
+        ret += ARABIC[char]
       end
     end
+    ret
   end
 
 end
