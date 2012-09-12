@@ -23,7 +23,7 @@ class RomanNumeral
   SUBTRACTABLE_ROMANS = %w(I X C)
 
 
-  def initialize(num)
+  def initialize(num=nil)
     if num.is_a? Fixnum
       @arabic = num
       calculate_roman_equivalent
@@ -31,6 +31,12 @@ class RomanNumeral
       @roman = clean_up(num)
       calculate_arabic_equivalent
     end
+  end
+
+  def next_up_number(num)
+    first_char = num.to_s[0].to_i + 1
+    rest_of_chars = '0' * (num.to_s.length - 1)
+    (first_char.to_s + rest_of_chars).to_i
   end
 
   def clean_up(num)

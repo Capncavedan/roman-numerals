@@ -2,6 +2,25 @@ require 'roman_numeral'
 
 describe RomanNumeral do
 
+  context "#next_up_number" do
+    it "returns 10 for 9" do
+      RomanNumeral.new.next_up_number(9).should eq(10)
+    end
+
+    it "returns 100 for 99" do
+      RomanNumeral.new.next_up_number(99).should eq(100)
+    end
+
+    it "returns 1000 for 999" do
+      RomanNumeral.new.next_up_number(999).should eq(1000)
+    end
+
+    it "returns 2000 for 1999" do
+      RomanNumeral.new.next_up_number(1999).should eq(2000)
+    end
+  end
+
+
   context "from Arabic --> Roman" do
     context "basic conversion of an Arabic value to Roman" do
       it "returns Roman numeral I for Arabic value 1" do
@@ -77,23 +96,23 @@ describe RomanNumeral do
     context "bad Roman numeral input" do
       context "#clean_up" do
         it "should return blank for an unknown character" do
-          RomanNumeral.new('h').clean_up('h').should eq('')
+          RomanNumeral.new.clean_up('h').should eq('')
         end
 
         it "should return blank for an empty string" do
-          RomanNumeral.new('').clean_up('').should eq('')
+          RomanNumeral.new.clean_up('').should eq('')
         end
 
         it "should return blank for nil" do
-          RomanNumeral.new(nil).clean_up(nil).should eq('')
+          RomanNumeral.new.clean_up(nil).should eq('')
         end
 
         it "should remove whitespace" do
-          RomanNumeral.new('X X X I').clean_up('X X X I').should eq('XXXI')
+          RomanNumeral.new.clean_up('X X X I').should eq('XXXI')
         end
 
         it "should upcase passed-in numeral" do
-          RomanNumeral.new('mdclxvi').clean_up('mdclxvi').should eq('MDCLXVI')
+          RomanNumeral.new.clean_up('mdclxvi').should eq('MDCLXVI')
         end
       end
 
