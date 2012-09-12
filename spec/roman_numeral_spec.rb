@@ -57,6 +57,7 @@ describe RomanNumeral do
     end
   end
 
+
   context "bad input" do
     context "#clean_up" do
       it "should return blank for an unknown character" do
