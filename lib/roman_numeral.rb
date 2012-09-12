@@ -11,7 +11,11 @@ class RomanNumeral
   }
 
   def self.to_arabic(numeral)
-    TO_ARABIC[numeral]
+    ret = 0
+    numeral.each_char do |char|
+      ret += TO_ARABIC[char]
+    end
+    ret
   end
 
 end
