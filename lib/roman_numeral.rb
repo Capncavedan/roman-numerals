@@ -23,6 +23,7 @@ class RomanNumeral
   def initialize(num)
     if num.is_a? Fixnum
       @arabic = num
+      calculate_roman_equivalent
     else
       @roman = clean_up(num)
       calculate_arabic_equivalent
@@ -38,10 +39,14 @@ class RomanNumeral
   end
 
   def roman
-    ROMAN[@arabic]
+    @roman
   end
 
   private
+
+  def calculate_roman_equivalent
+    @roman = ROMAN[@arabic]
+  end
 
   def calculate_arabic_equivalent
     @arabic = 0
