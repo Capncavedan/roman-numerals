@@ -31,7 +31,7 @@ describe RomanNumeral do
         RomanNumeral.new(26).roman.should eq('XXVI')
       end
 
-      it "returns Roman numeral MIM for Arabic value 1999", pending: true do
+      it "returns Roman numeral MIM for Arabic value 1999" do
         RomanNumeral.new(1999).roman.should eq('MIM')
       end
     end
