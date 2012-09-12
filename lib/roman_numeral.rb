@@ -28,8 +28,8 @@ class RomanNumeral
   def calculate_arabic_equivalent
     @arabic = 0
     @numeral.chars.each_with_index do |char, i|
-      next_char = @numeral[i+1]
-      if TO_ARABIC[char] < TO_ARABIC[next_char].to_i
+      next_char = @numeral[i+1] # will be nil when loop is at end of string
+      if next_char && TO_ARABIC[char] < TO_ARABIC[next_char]
         @arabic -= TO_ARABIC[char]
       else
         @arabic += TO_ARABIC[char]

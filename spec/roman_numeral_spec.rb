@@ -51,7 +51,7 @@ describe RomanNumeral do
 
     %w(MDCCCCLXXXXVIIII  MCMXCIX  MIM).each do |num|
       # example numbers from http://en.wikipedia.org/wiki/Roman_numerals
-      it "returns 1999 for #{num}" do
+      it "returns an Arabic 1999 for #{num}" do
         RomanNumeral.new(num).arabic.should eq(1999)
       end
     end
