@@ -1,7 +1,5 @@
 class RomanNumeral
 
-  attr_reader :arabic
-
   TO_ARABIC = {
     'I' => 1,
     'V' => 5,
@@ -14,17 +12,20 @@ class RomanNumeral
 
   def initialize(num)
     @numeral = clean_up(num)
-    calculate_arabic_value
+    calculate_arabic_equivalent
   end
 
   def clean_up(num)
     num.to_s.upcase.gsub(/[^IVXLCDM]/, '')
   end
 
+  def arabic
+    @arabic == 0 ? nil : @arabic
+  end
+
   private
 
-  def calculate_arabic_value
-    return nil if @numeral == ''
+  def calculate_arabic_equivalent
     @arabic = 0
     @numeral.chars.each_with_index do |char, i|
       next_char = @numeral[i+1]

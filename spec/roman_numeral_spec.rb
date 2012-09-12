@@ -81,7 +81,7 @@ describe RomanNumeral do
       end
     end
 
-    context "#to_arabic" do
+    context "#arabic" do
       it "should return nil for an empty string" do
         RomanNumeral.new('').arabic.should be_nil
       end
