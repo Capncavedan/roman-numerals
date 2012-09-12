@@ -24,7 +24,7 @@ class RomanNumeral
     if num.is_a? Fixnum
       @arabic = num
     else
-      @numeral = clean_up(num)
+      @roman = clean_up(num)
       calculate_arabic_equivalent
     end
   end
@@ -45,8 +45,8 @@ class RomanNumeral
 
   def calculate_arabic_equivalent
     @arabic = 0
-    @numeral.chars.each_with_index do |char, i|
-      next_char = @numeral[i+1] # will be nil when block is at end of string
+    @roman.chars.each_with_index do |char, i|
+      next_char = @roman[i+1] # will be nil when block is at end of string
       if next_char && ARABIC[char] < ARABIC[next_char]
         @arabic -= ARABIC[char]
       else
