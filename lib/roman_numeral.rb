@@ -11,10 +11,12 @@ class RomanNumeral
   }
 
   def self.to_arabic(numeral)
+    numeral = numeral.to_s.gsub(/[^IVXLCDM]/, '')
+    return nil if numeral == ''
     ret = 0
     numeral.chars.each_with_index do |char, i|
       next_char = numeral[i+1]
-      if TO_ARABIC[next_char] && TO_ARABIC[char] < TO_ARABIC[next_char]
+      if TO_ARABIC[char] < TO_ARABIC[next_char].to_i
         ret -= TO_ARABIC[char]
       else
         ret += TO_ARABIC[char]
