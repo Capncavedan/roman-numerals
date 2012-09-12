@@ -2,7 +2,7 @@ require 'roman_numeral'
 
 describe RomanNumeral do
 
-  context "basic conversion of an Arabic value" do
+  context "basic conversion of an Arabic value to Roman" do
     it "returns Roman numeral I for Arabic value 1" do
       RomanNumeral.new(1).roman.should eq('I')
     end
@@ -17,12 +17,15 @@ describe RomanNumeral do
   end
 
 
+  context "more involved conversion of an Arabic value to Roman" do
+    it "returns Roman numeral XV for Arabic value 15" do
+      RomanNumeral.new(15).roman.should eq('XV')
+    end
 
-
-
-
-
-
+    it "returns Roman numeral XXV for Arabic value 25" do
+      RomanNumeral.new(25).roman.should eq('XXV')
+    end
+  end
 
 
 

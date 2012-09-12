@@ -47,12 +47,23 @@ class RomanNumeral
 
   def calculate_roman_equivalent
     @roman = ''
-    remainder = @arabic
-    while remainder > 0
-      %w(M D C L X V I).each do |num|
-        next if ARABIC[num] > remainder
-        @roman += num
-        remainder -= ARABIC[num]
+    digits = []
+    @arabic.to_s.reverse.chars.each_with_index do |c,i|
+      n = c + ('0' * i)
+      digits << n.to_i
+    end
+    digits.reverse!
+    digits.each do |d|
+      if d >= 1000
+        @roman += ('M' * (d/1000))
+      elsif d >= 100
+        @roman += ('C' * (d/100))
+      elsif d >= 10
+        @roman += ('X' * (d/10))
+      elsif d >= 5
+        @roman += ('V' * (d/5))
+      else
+        @roman += ('I' * d)
       end
     end
   end
