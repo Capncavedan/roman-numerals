@@ -1,6 +1,6 @@
 class RomanNumeral
 
-  TO_ARABIC = {
+  ARABIC = {
     'I' => 1,
     'V' => 5,
     'X' => 10,
@@ -29,10 +29,10 @@ class RomanNumeral
     @arabic = 0
     @numeral.chars.each_with_index do |char, i|
       next_char = @numeral[i+1] # will be nil when loop is at end of string
-      if next_char && TO_ARABIC[char] < TO_ARABIC[next_char]
-        @arabic -= TO_ARABIC[char]
+      if next_char && ARABIC[char] < ARABIC[next_char]
+        @arabic -= ARABIC[char]
       else
-        @arabic += TO_ARABIC[char]
+        @arabic += ARABIC[char]
       end
     end
   end

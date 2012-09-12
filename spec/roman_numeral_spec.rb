@@ -3,55 +3,33 @@ require 'roman_numeral'
 describe RomanNumeral do
 
   context "basic conversion" do
-    it "returns an Arabic 1 for a Roman numeral I" do
-      RomanNumeral.new('I').arabic.should eq(1)
-    end
-
-    it "returns an Arabic 5 for a Roman numeral V" do
-      RomanNumeral.new('V').arabic.should eq(5)
-    end
-
-    it "returns an Arabic 5 for a Roman numeral V" do
-      RomanNumeral.new('X').arabic.should eq(10)
-    end
-
-    it "returns an Arabic 5 for a Roman numeral V" do
-      RomanNumeral.new('L').arabic.should eq(50)
-    end
-
-    it "returns an Arabic 5 for a Roman numeral V" do
-      RomanNumeral.new('C').arabic.should eq(100)
-    end
-
-    it "returns an Arabic 5 for a Roman numeral V" do
-      RomanNumeral.new('D').arabic.should eq(500)
-    end
-
-    it "returns an Arabic 5 for a Roman numeral V" do
-      RomanNumeral.new('M').arabic.should eq(1000)
+    RomanNumeral::ARABIC.each do |roman, arabic|
+      it "returns Arabic value #{arabic} for Roman numeral #{roman}" do
+        RomanNumeral.new(roman).arabic.should eq(arabic)
+      end
     end
   end
 
 
   context "multiple characters" do
-    it "returns an Arabic 2 for a Roman numeral II" do
+    it "returns Arabic value 2 for Roman numeral II" do
       RomanNumeral.new('II').arabic.should eq(2)
     end
 
-    it "returns an Arabic 250 for a Roman numeral CCL" do
+    it "returns Arabic value 250 for Roman numeral CCL" do
       RomanNumeral.new('CCL').arabic.should eq(250)
     end
   end
 
 
   context "multiple characters with some smaller than the next" do
-    it "returns an Arabic 190 for a Roman numeral CXC" do
+    it "returns Arabic value 190 for Roman numeral CXC" do
       RomanNumeral.new('CXC').arabic.should eq(190)
     end
 
     %w(MDCCCCLXXXXVIIII  MCMXCIX  MIM).each do |num|
       # example numbers from http://en.wikipedia.org/wiki/Roman_numerals
-      it "returns an Arabic 1999 for #{num}" do
+      it "returns Arabic value 1999 for Roman numeral #{num}" do
         RomanNumeral.new(num).arabic.should eq(1999)
       end
     end
