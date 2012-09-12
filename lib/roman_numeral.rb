@@ -10,9 +10,23 @@ class RomanNumeral
     'M' => 1000
   }
 
+  ROMAN = {
+     1    => 'I',
+     5    => 'V',
+     10   => 'X',
+     50   => 'L',
+     100  => 'C',
+     500  => 'D',
+     1000 => 'M'
+  }
+
   def initialize(num)
-    @numeral = clean_up(num)
-    calculate_arabic_equivalent
+    if num.is_a? Fixnum
+      @arabic = num
+    else
+      @numeral = clean_up(num)
+      calculate_arabic_equivalent
+    end
   end
 
   def clean_up(num)
@@ -21,6 +35,10 @@ class RomanNumeral
 
   def arabic
     @arabic == 0 ? nil : @arabic
+  end
+
+  def roman
+    ROMAN[@arabic]
   end
 
   private

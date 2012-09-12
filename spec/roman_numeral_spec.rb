@@ -2,6 +2,20 @@ require 'roman_numeral'
 
 describe RomanNumeral do
 
+  context "basic conversion of an Arabic value" do
+    it "returns Roman numeral I for Arabic value 1" do
+      RomanNumeral.new(1).roman.should eq('I')
+    end
+
+    it "returns Roman numeral V for Arabic value 5" do
+      RomanNumeral.new(5).roman.should eq('V')
+    end
+
+    it "returns Roman numeral M for Arabic value 1000" do
+      RomanNumeral.new(1000).roman.should eq('M')
+    end
+  end
+
   context "basic conversion of a Roman numeral" do
     RomanNumeral::ARABIC.each do |roman, arabic|
       it "returns Arabic value #{arabic} for Roman numeral #{roman}" do
