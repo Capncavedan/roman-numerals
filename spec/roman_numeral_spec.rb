@@ -4,78 +4,86 @@ describe RomanNumeral do
 
   context "basic conversion" do
     it "returns an Arabic 1 for a Roman numeral I" do
-      RomanNumeral.to_arabic('I').should eq(1)
+      RomanNumeral.new('I').arabic.should eq(1)
     end
 
     it "returns an Arabic 5 for a Roman numeral V" do
-      RomanNumeral.to_arabic('V').should eq(5)
+      RomanNumeral.new('V').arabic.should eq(5)
     end
 
     it "returns an Arabic 5 for a Roman numeral V" do
-      RomanNumeral.to_arabic('X').should eq(10)
+      RomanNumeral.new('X').arabic.should eq(10)
     end
 
     it "returns an Arabic 5 for a Roman numeral V" do
-      RomanNumeral.to_arabic('L').should eq(50)
+      RomanNumeral.new('L').arabic.should eq(50)
     end
 
     it "returns an Arabic 5 for a Roman numeral V" do
-      RomanNumeral.to_arabic('C').should eq(100)
+      RomanNumeral.new('C').arabic.should eq(100)
     end
 
     it "returns an Arabic 5 for a Roman numeral V" do
-      RomanNumeral.to_arabic('D').should eq(500)
+      RomanNumeral.new('D').arabic.should eq(500)
     end
 
     it "returns an Arabic 5 for a Roman numeral V" do
-      RomanNumeral.to_arabic('M').should eq(1000)
+      RomanNumeral.new('M').arabic.should eq(1000)
     end
   end
 
 
   context "multiple characters" do
     it "returns an Arabic 2 for a Roman numeral II" do
-      RomanNumeral.to_arabic('II').should eq(2)
+      RomanNumeral.new('II').arabic.should eq(2)
     end
 
     it "returns an Arabic 250 for a Roman numeral CCL" do
-      RomanNumeral.to_arabic('CCL').should eq(250)
+      RomanNumeral.new('CCL').arabic.should eq(250)
     end
   end
 
 
   context "multiple characters with some smaller than the next" do
     it "returns an Arabic 190 for a Roman numeral CXC" do
-      RomanNumeral.to_arabic('CXC').should eq(190)
+      RomanNumeral.new('CXC').arabic.should eq(190)
     end
 
     %w(MDCCCCLXXXXVIIII  MCMXCIX  MIM).each do |num|
       # example numbers from http://en.wikipedia.org/wiki/Roman_numerals
       it "returns 1999 for #{num}" do
-        RomanNumeral.to_arabic(num).should eq(1999)
+        RomanNumeral.new(num).arabic.should eq(1999)
       end
     end
   end
 
   context "bad input" do
-    it "should return nil for an unknown character" do
-      RomanNumeral.to_arabic('h').should be_nil
+    context "#clean_up" do
+      it "should return blank for an unknown character" do
+        RomanNumeral.new('h').clean_up('h').should eq('')
+      end
+
+      it "should return blank for an empty string" do
+        RomanNumeral.new('').clean_up('').should eq('')
+      end
+
+      it "should return blank for nil" do
+        RomanNumeral.new(nil).clean_up(nil).should eq('')
+      end
+
+      it "should remove whitespace" do
+        RomanNumeral.new('X X X I').clean_up('X X X I').should eq('XXXI')
+      end
+
+      it "should upcase passed-in numeral" do
+        RomanNumeral.new('mdclxvi').clean_up('mdclxvi').should eq('MDCLXVI')
+      end
     end
 
-    it "should return nil for an empty string" do
-      RomanNumeral.to_arabic('').should be_nil
-    end
-
-    it "should return nil for nil" do
-      RomanNumeral.to_arabic(nil).should be_nil
-    end
-
-    it "should return correct value when numeral has spaces" do
-      RomanNumeral.to_arabic('X X X I').should eq(31)
-    end
-
-    it "should return correct value when numeral is lowercase" do
-      RomanNumeral.to_arabic('mdclxvi').should eq(1666)
+    context "#to_arabic" do
+      it "should return nil for an empty string" do
+        RomanNumeral.new('').arabic.should be_nil
+      end
     end
   end
 
