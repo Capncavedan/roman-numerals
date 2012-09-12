@@ -25,6 +25,14 @@ describe RomanNumeral do
     it "returns Roman numeral XXV for Arabic value 25" do
       RomanNumeral.new(25).roman.should eq('XXV')
     end
+
+    it "returns Roman numeral XXVI for Arabic value 26", pending: true do
+      RomanNumeral.new(26).roman.should eq('XXVI')
+    end
+
+    it "returns Roman numeral MIM for Arabic value 1999", pending: true do
+      RomanNumeral.new(1999).roman.should eq('MIM')
+    end
   end
 
 
