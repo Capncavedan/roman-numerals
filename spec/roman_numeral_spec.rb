@@ -2,7 +2,7 @@ require 'roman_numeral'
 
 describe RomanNumeral do
 
-  context "basic conversion" do
+  context "basic conversion of a Roman numeral" do
     RomanNumeral::ARABIC.each do |roman, arabic|
       it "returns Arabic value #{arabic} for Roman numeral #{roman}" do
         RomanNumeral.new(roman).arabic.should eq(arabic)
@@ -11,7 +11,7 @@ describe RomanNumeral do
   end
 
 
-  context "multiple characters" do
+  context "multiple-character Roman numerals" do
     it "returns Arabic value 2 for Roman numeral II" do
       RomanNumeral.new('II').arabic.should eq(2)
     end
@@ -22,7 +22,7 @@ describe RomanNumeral do
   end
 
 
-  context "multiple characters with some smaller than the next" do
+  context "multiple-character Roman numerals with some smaller than the next" do
     it "returns Arabic value 190 for Roman numeral CXC" do
       RomanNumeral.new('CXC').arabic.should eq(190)
     end
@@ -36,7 +36,7 @@ describe RomanNumeral do
   end
 
 
-  context "bad input" do
+  context "bad Roman numeral input" do
     context "#clean_up" do
       it "should return blank for an unknown character" do
         RomanNumeral.new('h').clean_up('h').should eq('')
