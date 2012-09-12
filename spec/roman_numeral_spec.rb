@@ -36,4 +36,17 @@ describe RomanNumeral do
     end
   end
 
+  context "multiple characters with some smaller than the next" do
+    it "returns an Arabic 190 for a Roman numeral CXC" do
+      RomanNumeral.to_arabic('CXC').should eq(190)
+    end
+
+    %w(MDCCCCLXXXXVIIII  MCMXCIX  MIM).each do |num|
+      # example numbers from Wikipedia
+      it "returns 1999 for #{num}" do
+        RomanNumeral.to_arabic(num).should eq(1999)
+      end
+    end
+  end
+
 end
