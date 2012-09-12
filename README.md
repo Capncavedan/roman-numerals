@@ -1,4 +1,4 @@
-roman-numerals
+Roman Numerals
 ==============
 
-Roman numerals / dabbling in Ruby
+Dabbling in Ruby with Roman numerals
