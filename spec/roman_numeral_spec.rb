@@ -59,6 +59,19 @@ describe RomanNumeral do
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
+  context "somewhat tautologic comparison" do
+    context "of Arabic --> Roman --> Arabic" do
+      (1..1001).each do |num|
+        it "means #{num} to Roman to Arabic matches #{num}" do
+          roman = RomanNumeral.new(num).roman
+          RomanNumeral.new(roman).arabic.should eq(num)
+        end
+      end
+    end
+  end
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+
   context "from Roman --> Arabic" do
     context "basic conversion of a Roman numeral" do
       RomanNumeral::ARABIC.each do |roman, arabic|
