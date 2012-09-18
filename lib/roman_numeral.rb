@@ -80,14 +80,13 @@ class RomanNumeral
       elsif d == 9
         ret += 'IX'
       elsif d >= 5
-        ret += ('V' * (d/5))
+        ret += ('V' + ('I' * (d-5)))
       elsif d == 4
         ret += 'IV'
       else
         ret += ('I' * d)
       end
     end
-    ret += 'I' while (arabic_equivalent(ret) < arabic_number)
     ret
   end
 

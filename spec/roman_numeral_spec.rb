@@ -105,8 +105,7 @@ describe RomanNumeral do
 
 
   context "Roman numeral patterns" do
-    # Common usage rules as found on Wikipedia
-    # from http://en.wikipedia.org/wiki/Roman_numerals
+    # Common usage rules as found on Wikipedia: http://en.wikipedia.org/wiki/Roman_numerals
     #
     # "I", "X", "C", and "M" can be repeated three times in succession, but no more.
     # "D", "L", and "V" can never be repeated.
