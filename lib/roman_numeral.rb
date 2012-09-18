@@ -69,12 +69,16 @@ class RomanNumeral
     digits.each do |d|
       if d >= 1000
         ret += ('M' * (d/1000))
-      elsif d >= 900
+      elsif d == 900
         ret += 'CM'
       elsif d >= 100
         ret += ('C' * (d/100))
-      elsif d >= 90
+      elsif d == 90
         ret += 'XC'
+      elsif d >= 50
+        ret += ('L' + ('X' * ((d-50)/10)))
+      elsif d == 40
+        ret += 'XL'
       elsif d >= 10
         ret += ('X' * (d/10))
       elsif d == 9
