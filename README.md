@@ -5,7 +5,7 @@ Dabbling in Ruby with Roman numerals.
 
 To get a Roman numeral's Arabic equivalent, pass in a string:
 
-`RomanNumeral.new("MIM").arabic # => 1999`
+`RomanNumeral.new("MCMXCIX").arabic # => 1999`
 
 To get the Arabic equivalent of a Roman numeral, pass in an integer:
 
