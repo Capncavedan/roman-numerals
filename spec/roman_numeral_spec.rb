@@ -38,8 +38,20 @@ describe RomanNumeral do
 
 
     context "more involved conversion of an Arabic value to Roman" do
+      it "returns Roman numeral IV for Arabic value 4" do
+        RomanNumeral.new(4).roman.should eq('IV')
+      end
+
+      it "returns Roman numeral IX for Arabic value 9" do
+        RomanNumeral.new(9).roman.should eq('IX')
+      end
+
       it "returns Roman numeral XV for Arabic value 15" do
         RomanNumeral.new(15).roman.should eq('XV')
+      end
+
+      it "returns Roman numeral XIX for Arabic value 19" do
+        RomanNumeral.new(19).roman.should eq('XIX')
       end
 
       it "returns Roman numeral XXV for Arabic value 25" do
@@ -59,10 +71,10 @@ describe RomanNumeral do
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
-  context "somewhat tautologic comparison" do
+  context "somewhat tautologic comparisons" do
     context "of Arabic --> Roman --> Arabic" do
       (1..1001).each do |num|
-        it "means #{num} to Roman to Arabic matches #{num}" do
+        it "Arabic #{num} to Roman to Arabic matches #{num}" do
           roman = RomanNumeral.new(num).roman
           RomanNumeral.new(roman).arabic.should eq(num)
         end

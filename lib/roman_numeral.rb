@@ -81,6 +81,8 @@ class RomanNumeral
         ret += 'IX'
       elsif d >= 5
         ret += ('V' * (d/5))
+      elsif d == 4
+        ret += 'IV'
       else
         ret += ('I' * d)
       end
