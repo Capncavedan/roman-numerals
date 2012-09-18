@@ -109,13 +109,13 @@ describe RomanNumeral do
     # from http://en.wikipedia.org/wiki/Roman_numerals
     #
     # "I", "X", "C", and "M" can be repeated three times in succession, but no more.
-    # "D", "L", and "V" can never be repeated.[7][8]
+    # "D", "L", and "V" can never be repeated.
     # "I" can be subtracted from "V" and "X" only.
     # "X" can be subtracted from "L" and "C" only.
     # "C" can be subtracted from "D" and "M" only.
     # "V", "L", and "D" can never be subtracted[8]
-    # Only one small-value symbol may be subtracted from any large-value symbol.[9]
- 
+    # Only one small-value symbol may be subtracted from any large-value symbol.
+
     (1..1001).each do |num|
       context "repeating digits" do
         before do
@@ -123,21 +123,22 @@ describe RomanNumeral do
         end
 
         it "#{num} in Roman should not contain more than 3 I's X's C's or M's in succession" do
-          @roman.should_not =~ /I{4}|X{4}|C{4}|M{4}/
-        end
-        it "#{num} in Roman should not repeat D's, L's or V's" do
-          @roman.should_not =~ /D{2,}|L{2,}|V{2,}/
+          @roman.should_not =~ /IIII|XXXX|CCCC|MMMM/
         end
 
-        it "should never subtract I from anything other than V or X" do
+        it "#{num} in Roman should not repeat D's, L's or V's" do
+          @roman.should_not =~ /DD|LL|VV/
+        end
+
+        it "should never subtract I from other than V or X" do
           @roman.should_not =~ /I[LCDM]/
         end
 
-        it "should never subtract X from anything other than L or C" do
+        it "should never subtract X from other than L or C" do
           @roman.should_not =~ /X[DM]/
         end
 
-        it "should never subtract a V, L or D" do
+        it "should never subtract a V, L or D from anything larger" do
           @roman.should_not =~ /V[XLCDM]|L[CDM]|DM/
         end
       end

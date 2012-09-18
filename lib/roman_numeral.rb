@@ -20,8 +20,6 @@ class RomanNumeral
      1000 => 'M'
   }
 
-  SUBTRACTABLE_ROMANS = %w(I X C)
-
 
   def initialize(num=nil)
     if num.is_a? Fixnum
