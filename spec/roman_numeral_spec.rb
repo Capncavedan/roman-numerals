@@ -2,27 +2,8 @@ require 'roman_numeral'
 
 describe RomanNumeral do
 
-  context "#next_up_number" do
-    it "returns 10 for 9" do
-      RomanNumeral.new.next_up_number(9).should eq(10)
-    end
-
-    it "returns 100 for 99" do
-      RomanNumeral.new.next_up_number(99).should eq(100)
-    end
-
-    it "returns 1000 for 999" do
-      RomanNumeral.new.next_up_number(999).should eq(1000)
-    end
-
-    it "returns 2000 for 1999" do
-      RomanNumeral.new.next_up_number(1999).should eq(2000)
-    end
-  end
-
-
   context "from Arabic --> Roman" do
-    context "basic conversion of an Arabic value to Roman" do
+    context "conversion of an Arabic value to Roman" do
       it "returns Roman numeral I for Arabic value 1" do
         RomanNumeral.new(1).roman.should eq('I')
       end
@@ -33,6 +14,14 @@ describe RomanNumeral do
 
       it "returns Roman numeral X for Arabic value 10" do
         RomanNumeral.new(10).roman.should eq('X')
+      end
+
+      it "returns Roman numeral XXX for Arabic value 30" do
+        RomanNumeral.new(30).roman.should eq('XXX')
+      end
+
+      it "returns Roman numeral XL for Arabic value 40" do
+        RomanNumeral.new(40).roman.should eq('XL')
       end
 
       it "returns Roman numeral L for Arabic value 50" do
@@ -55,13 +44,22 @@ describe RomanNumeral do
         RomanNumeral.new(90).roman.should eq('XC')
       end
 
+      it "returns Roman numeral CD for Arabic value 400" do
+        RomanNumeral.new(400).roman.should eq('CD')
+      end
+
+      it "returns Roman numeral D for Arabic value 500" do
+        RomanNumeral.new(500).roman.should eq('D')
+      end
+
+      it "returns Roman numeral DC for Arabic value 600" do
+        RomanNumeral.new(600).roman.should eq('DC')
+      end
+
       it "returns Roman numeral M for Arabic value 1000" do
         RomanNumeral.new(1000).roman.should eq('M')
       end
-    end
 
-
-    context "more involved conversion of an Arabic value to Roman" do
       it "returns Roman numeral IV for Arabic value 4" do
         RomanNumeral.new(4).roman.should eq('IV')
       end
@@ -93,7 +91,6 @@ describe RomanNumeral do
     end
   end
 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
   context "somewhat tautologic comparisons" do
     context "of Arabic --> Roman --> Arabic" do
@@ -106,54 +103,47 @@ describe RomanNumeral do
     end
   end
 
-# "I", "X", "C", and "M" can be repeated three times in succession, but no more.
 
-# "D", "L", and "V" can never be repeated.[7][8]
+  context "Roman numeral patterns" do
+    # Common usage rules as found on Wikipedia
+    # from http://en.wikipedia.org/wiki/Roman_numerals
+    #
+    # "I", "X", "C", and "M" can be repeated three times in succession, but no more.
+    # "D", "L", and "V" can never be repeated.[7][8]
+    # "I" can be subtracted from "V" and "X" only.
+    # "X" can be subtracted from "L" and "C" only.
+    # "C" can be subtracted from "D" and "M" only.
+    # "V", "L", and "D" can never be subtracted[8]
+    # Only one small-value symbol may be subtracted from any large-value symbol.[9]
+ 
+    (1..1001).each do |num|
+      context "repeating digits" do
+        before do
+          @roman = RomanNumeral.new(num).roman
+        end
 
-# "I" can be subtracted from "V" and "X" only.
+        it "#{num} in Roman should not contain more than 3 I's X's C's or M's in succession" do
+          @roman.should_not =~ /I{4}|X{4}|C{4}|M{4}/
+        end
+        it "#{num} in Roman should not repeat D's, L's or V's" do
+          @roman.should_not =~ /D{2,}|L{2,}|V{2,}/
+        end
 
-# "X" can be subtracted from "L" and "C" only.
+        it "should never subtract I from anything other than V or X" do
+          @roman.should_not =~ /I[LCDM]/
+        end
 
-# "C" can be subtracted from "D" and "M" only.
+        it "should never subtract X from anything other than L or C" do
+          @roman.should_not =~ /X[DM]/
+        end
 
-# "V", "L", and "D" can never be subtracted[8]
+        it "should never subtract a V, L or D" do
+          @roman.should_not =~ /V[XLCDM]|L[CDM]|DM/
+        end
+      end
+    end
+  end
 
-# Only one small-value symbol may be subtracted from any large-value symbol.[9]
-
-  # context "Roman numeral patterns" do
-  #   (1..1001).each do |num|
-  #     context "repeating digits" do
-  #       before do
-  #         @roman = RomanNumeral.new(num).roman
-  #       end
-
-  #       it "#{num} in Roman should not contain more than 3 I's in succession" do
-  #         @roman.should_not =~ /I{4}/
-  #       end
-  #       it "#{num} in Roman should not contain more than 3 X's in succession" do
-  #         @roman.should_not =~ /X{4}/
-  #       end
-  #       it "#{num} in Roman should not contain more than 3 C's in succession" do
-  #         @roman.should_not =~ /C{4}/
-  #       end
-  #       it "#{num} in Roman should not contain more than 3 M's in succession" do
-  #         @roman.should_not =~ /M{4}/
-  #       end
-  #       it "#{num} in Roman should not repeat D's" do
-  #         @roman.should_not =~ /D{2,}/
-  #       end
-  #       it "#{num} in Roman should not repeat L's" do
-  #         @roman.should_not =~ /L{2,}/
-  #       end
-  #       it "#{num} in Roman should not repeat V's" do
-  #         @roman.should_not =~ /V{2,}/
-  #       end
-
-  #     end
-  #   end
-  # end
-
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
   context "from Roman --> Arabic" do
     context "basic conversion of a Roman numeral" do

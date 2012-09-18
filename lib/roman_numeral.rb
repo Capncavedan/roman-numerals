@@ -33,12 +33,6 @@ class RomanNumeral
     end
   end
 
-  def next_up_number(num)
-    first_char = num.to_s[0].to_i + 1
-    rest_of_chars = '0' * (num.to_s.length - 1)
-    (first_char.to_s + rest_of_chars).to_i
-  end
-
   def clean_up(num)
     num.to_s.upcase.gsub(/[^IVXLCDM]/, '')
   end
@@ -71,6 +65,10 @@ class RomanNumeral
         ret += ('M' * (d/1000))
       elsif d == 900
         ret += 'CM'
+      elsif d >= 500
+        ret += ('D' + ('C' * ((d-500)/100)))
+      elsif d == 400
+        ret += 'CD'
       elsif d >= 100
         ret += ('C' * (d/100))
       elsif d == 90
