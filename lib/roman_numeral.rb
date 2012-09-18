@@ -43,6 +43,17 @@ class RomanNumeral
     @roman
   end
 
+  def standalone_digits_in_proper_base_ten(arabic_number)
+    # make an array of the individual parts of a number;
+    # 1903 becomes 1000, 900, 0, and 3
+    digits = []
+    arabic_number.to_s.reverse.chars.each_with_index do |char, i|
+      n = char + ('0' * i)
+      digits << n.to_i
+    end
+    digits.reverse
+  end
+
 
   private
 
@@ -52,13 +63,7 @@ class RomanNumeral
 
   def roman_equivalent(arabic_number)
     ret = ''
-    digits = []
-    arabic_number.to_s.reverse.chars.each_with_index do |c,i|
-      n = c + ('0' * i)
-      digits << n.to_i
-    end
-    digits.reverse!
-    digits.each do |d|
+    standalone_digits_in_proper_base_ten(arabic_number).each do |d|
       if d >= 1000
         ret += ('M' * (d/1000))
       elsif d == 900

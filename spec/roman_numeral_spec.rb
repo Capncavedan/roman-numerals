@@ -129,12 +129,8 @@ describe RomanNumeral do
           @roman.should_not =~ /DD|LL|VV/
         end
 
-        it "should never subtract I from other than V or X" do
-          @roman.should_not =~ /I[LCDM]/
-        end
-
-        it "should never subtract X from other than L or C" do
-          @roman.should_not =~ /X[DM]/
+        it "should never subtract I from other than V or X, nor X from other than L or C" do
+          @roman.should_not =~ /I[LCDM]|X[DM]/
         end
 
         it "should never subtract a V, L or D from anything larger" do
@@ -175,6 +171,26 @@ describe RomanNumeral do
       %w(MDCCCCLXXXXVIIII  MCMXCIX  MIM).each do |num|
         it "returns Arabic value 1999 for Roman numeral #{num}" do
           RomanNumeral.new(num).arabic.should eq(1999)
+        end
+      end
+    end
+
+    context "helper methods" do
+      describe "#standalone_digits_in_proper_base_ten" do
+        it "should return [3] for 3" do
+          RomanNumeral.new().standalone_digits_in_proper_base_ten(3).should == [3]
+        end
+
+        it "should return [1000, 200, 30, 4] for 1234" do
+          RomanNumeral.new().standalone_digits_in_proper_base_ten(1234).should == [1000, 200, 30, 4]
+        end
+
+        it "should return [10, 0] for 10" do
+          RomanNumeral.new().standalone_digits_in_proper_base_ten(10).should == [10, 0]
+        end
+
+        it "should return [8000000 600000 70000 5000 300 0 9] for 8675309" do
+          RomanNumeral.new().standalone_digits_in_proper_base_ten(8675309).should == [8000000, 600000, 70000, 5000, 300, 0, 9]
         end
       end
     end
